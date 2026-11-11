@@ -1,0 +1,16 @@
+name: Watch upstream
+
+on:
+  schedule:
+    - cron: '32 6 * * *'   # daily 06:32 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  watch:
+    uses: open-img-cloud/.github/.github/workflows/upstream-watch.yml@main
+    with:
+      os_name: debian-12
