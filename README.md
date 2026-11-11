@@ -9,7 +9,7 @@ part of the [openimages.cloud](https://openimages.cloud) catalog.
 ## About
 
 Debian 12 "bookworm" is the universal operating system published by the Debian Project ([https://www.debian.org/](https://www.debian.org/)). This repo takes the official upstream
-`genericcloud` image ([listing](https://cloud.debian.org/images/cloud/bookworm/)), verifies it against the
+`generic` image ([listing](https://cloud.debian.org/images/cloud/bookworm/)), verifies it against the
 upstream `SHA512SUMS`, adds `qemu-guest-agent`, applies the openimages.cloud cloud-init
 policy, boot-tests it, signs it with cosign (keyless) and publishes it.
 
@@ -18,6 +18,17 @@ The build pipeline is shared with the rest of
 `VERSION`, `build/customize.sh`, `build/detect-upstream.sh` and two thin
 caller workflows that delegate to the reusable workflows in
 [`open-img-cloud/.github`](https://github.com/open-img-cloud/.github).
+
+## Why `generic` and not `genericcloud`
+
+Debian 12's `genericcloud` image runs the trimmed `cloud` kernel, which
+ships no CD-ROM driver (`sr_mod`, `ata_piix`, `isofs` are absent): the
+OpenStack config drive (`/dev/sr0`, label `config-2`) is invisible, so
+cloud-init can only use the HTTP metadata service. When DHCP is slow it
+finds no datasource at all and the instance boots without its SSH key.
+The `generic` image (full kernel) reads the config drive with no network.
+Debian 13's cloud kernel does see the CD-ROM, so debian-13 keeps
+`genericcloud`.
 
 ## Lifecycle
 

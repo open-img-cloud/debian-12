@@ -51,7 +51,7 @@ jobs:
       os_name: debian-12
       version: ${{ needs.resolve-version.outputs.version }}
       output_filename: 'debian-{version}-x86_64.qcow2'
-      upstream_url: 'https://cloud.debian.org/images/cloud/bookworm/{version_suffix}/debian-12-genericcloud-amd64-{version_suffix}.qcow2'
+      upstream_url: 'https://cloud.debian.org/images/cloud/bookworm/{version_suffix}/debian-12-generic-amd64-{version_suffix}.qcow2'
       upstream_checksum_url: 'https://cloud.debian.org/images/cloud/bookworm/{version_suffix}/SHA512SUMS'
       decompress: none
       customize_script: build/customize.sh
