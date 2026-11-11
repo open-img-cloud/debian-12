@@ -25,7 +25,7 @@ Debian 12 is supported by the Debian LTS team until **2028-06-30**. Debian 13 is
 
 ## Image
 
-- File: `debian-12-<version>-x86_64.qcow2`, where `<version>` is
+- File: `debian-<version>-x86_64.qcow2`, where `<version>` is
   `<major>-<upstream build id>` (e.g. `12-20261026-2643`).
 - Default user: `debian` (SSH key from cloud-init, passwordless sudo).
 - The root filesystem grows to the flavor disk on first boot.
@@ -34,12 +34,12 @@ Debian 12 is supported by the Debian LTS team until **2028-06-30**. Debian 13 is
 
 ```sh
 V=12-20261026-2643
-curl -fLO https://images.openimages.cloud/debian-12/$V/debian-12-$V-x86_64.qcow2
+curl -fLO https://images.openimages.cloud/debian-12/$V/debian-$V-x86_64.qcow2
 
 openstack image create \
     --disk-format qcow2 --container-format bare \
     --property hw_qemu_guest_agent=yes \
-    --file debian-12-$V-x86_64.qcow2 \
+    --file debian-$V-x86_64.qcow2 \
     'Debian 12 '$V
 ```
 
